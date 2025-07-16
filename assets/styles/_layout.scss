@@ -1,0 +1,77 @@
+@use 'variables' as v;
+
+nav{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    
+    .nav-list {
+        display: flex;
+        gap: 20px;
+        list-style-type: none;
+    }
+
+    .nav-list li a {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px;
+    }
+
+    
+    .w_logo{
+       margin: 1rem;
+    }
+    ul{
+        display: flex;
+        align-items: center;
+        a{
+            color: white;
+            margin: 0 2rem;
+            font-size: 1.5rem;
+            transition: transform 0.2s ease-in-out;
+            display: inline-block;
+            &:hover{
+                transform: scale(1.2);
+            }
+        }
+        .active{
+            color: v.$thirdcolor;
+        }
+    }
+}
+
+footer{
+    background-color: v.$primary-color;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    div{
+        padding-top: 1rem;
+    }
+    ul{
+        padding-top: 1rem;
+        li{
+            margin: 0.5rem;
+            a{
+                color: white;
+            }
+            p{
+                color: white;
+            }
+        }
+    }
+
+
+}
+
+
+#login, #register{
+    background-image: url(/public/images/bgInscription.jpg);
+    background-position: center;
+    background-size: cover;
+    color: white;
+    h1{
+        font-size: 4rem;
+        color: v.$grey;
+    }
+}

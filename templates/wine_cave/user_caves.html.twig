@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Caves des Utilisateurs{% endblock %}
+
+{% block body %}
+    <main id="user-caves">
+        <h1>Les Caves des Utilisateurs</h1>
+
+        {% if caves is empty %}
+            <p>Aucune cave enregistrée.</p>
+        {% else %}
+            <div class="cave-list">
+                {% for cave in caves %}
+                    <article class="user-cave">
+                        <h2>Cave de {{ cave.user.username }}</h2>
+                        <p>Nombre de bouteilles : {{ cave.wine|length }}</p>
+                        <a href="{{ path('view_cave', { 'id': cave.id }) }}" class="btn">Voir la cave</a>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}

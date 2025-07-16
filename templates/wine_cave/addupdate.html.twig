@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WineCaveController!{% endblock %}
+
+{% block body %}
+    <main id="form-wine">
+
+		<h1> {{ isModification ? 'Modifier une bouteille' :  'Ajouter une bouteille' }}</h1>
+		<div class="add_form">
+			{{form_start(wineForm)}}
+				{{ form_row(wineForm.name, {
+					'label': 'Nom du Vin',
+					'label_attr': {'class': 'form-label'},
+					'attr': {'placeholder': 'Le nom du millésime', 'class': 'form-input'}
+				}) }}
+				{{ form_row(wineForm.year, {
+					'label': 'Année',
+					'label_attr': {'class': 'form-label'},
+					'attr': {'placeholder': "L'année du millésime", 'class': 'form-input'}
+				}) }}
+				{{ form_row(wineForm.body, {
+					'label': 'Déscription',
+					'label_attr': {'class': 'form-label'},
+					'attr': {'placeholder': '', 'class': 'form-input'}
+				}) }}
+				<div class="checkbox-group">
+					{{ form_label(wineForm.cepages) }}
+					{{ form_errors(wineForm.cepages) }}
+					<div>
+						{% for choice in wineForm.cepages %}
+							<label for="{{ choice.vars.id }}">
+								{{ form_widget(choice) }}
+								{{ choice.vars.label }}
+							</label>
+						{% endfor %}
+					</div>
+				</div>
+
+				{{form_widget(wineForm)}}
+				<button>{{ isModification ? 'Modifier' :  'Ajouter' }}</button>
+			{{form_end(wineForm)}}
+		</div>
+	</main>
+{% endblock %}

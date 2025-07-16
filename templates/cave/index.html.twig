@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Cave{% endblock %}
+
+{% block body %}
+    <main id="cave">
+        
+
+        {% if cave is empty %}
+            <p>Votre cave est vide.</p>
+        {% else %}
+            {% for bouteille in cave.bouteilles %}
+                <article class="bottle">
+                    <div class="card">
+                        <img src="{{ asset('uploads/images/' ~ bouteille.imageName) }}" alt="Image de {{ bouteille.name }}">
+                        <h2>{{ bouteille.name }}</h2>
+                        <p>Année : {{ bouteille.year }}</p>
+                        <p>Cépages : 
+                            {% for cepage in bouteille.cepages %}
+                                {{ cepage.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p>Région : {{ bouteille.regions.name }}, {{ bouteille.regions.country.name }}</p>
+
+                        <!-- Description courte -->
+                        <p id="bouteille-description-{{ bouteille.id }}">
+                            {{ bouteille.body|slice(0, 100) }}{% if bouteille.body|length > 100 %}...{% endif %}
+                            {% if bouteille.body|length > 100 %}
+                                <button class="toggle-btn" onclick="toggleDescription({{ bouteille.id }})" aria-expanded="false">Voir plus</button>
+                            {% endif %}
+                        </p>
+
+                        <!-- Description complète -->
+                        <p id="bouteille-description-full-{{ bouteille.id }}" hidden>
+                            {{ bouteille.body }}
+                            <button class="toggle-btn" onclick="toggleDescription({{ bouteille.id }})" aria-expanded="true">Voir moins</button>
+                        </p>         
+                    </div>
+                    
+                    <!-- Bouton pour supprimer un vin de la cave -->
+                    <a href="{{ path('remove_bouteille_from_cave', { 'id': bouteille.id }) }}" class="btn">Retirer de ma cave</a>
+                </article>
+            {% endfor %}
+        {% endif %}
+    </main>
+
+    <!-- Script pour gérer Voir Plus / Voir Moins -->
+    <script>
+        function toggleDescription(bouteilleId) {
+            var fullDescription = document.getElementById('bouteille-description-full-' + bouteilleId);
+            var shortDescription = document.getElementById('bouteille-description-' + bouteilleId);
+            var button = shortDescription.querySelector("button") || fullDescription.querySelector("button");
+
+            if (fullDescription.hidden) {
+                fullDescription.hidden = false;
+                shortDescription.hidden = true;
+                button.textContent = "Voir moins";
+            } else {
+                fullDescription.hidden = true;
+                shortDescription.hidden = false;
+                button.textContent = "Voir plus";
+            }
+        }
+    </script>
+{% endblock %}

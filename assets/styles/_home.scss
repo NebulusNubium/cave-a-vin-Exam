@@ -1,0 +1,70 @@
+@use 'variables' as v;
+@use "mixins" as m;
+
+//accueil
+main{
+    background-image: url(/public/images/accueil.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 120vh;
+    .pink{
+        position: absolute;
+        text-align: center;
+        background-color: #885c7e7c;
+        margin: 4rem;
+        padding: 2rem;
+        h2{
+            font-family: "Bold";
+            text-transform: uppercase;
+            color: white;
+        }
+        h1{
+            font-family: "Bold";
+            font-size: 3rem;
+            color: v.$primary-color;
+            text-transform: uppercase;
+        }
+        p{
+            font-family: "Regular";
+            color: white;
+        }
+        .purple{
+            display: flex;
+            article{
+                background-color: v.$primary-color;
+                padding: 2rem;
+                margin: 2rem;
+                height: 100px
+               
+            }
+            
+        }
+        .l-purple{
+            background-color: v.$primary-color;
+            padding: 2rem;
+            margin: 2rem;
+        }
+        
+    }
+}
+@media (max-width: 1344px) {
+    main{
+        height: auto;
+        .pink{
+            position: relative;
+            margin-top: 0;
+            margin-bottom: 0;
+            justify-content: center;
+            display: flex;
+            flex-wrap: wrap;
+            .purple{
+                flex-direction: column;
+                justify-content: center;
+                height: auto;
+                
+            }
+        }
+    }
+    
+    
+}

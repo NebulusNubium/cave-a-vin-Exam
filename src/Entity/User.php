@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -31,6 +34,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Bouteilles>
+     */
+    #[ORM\ManyToMany(targetEntity: Bouteilles::class, mappedBy: 'user')]
+    private Collection $bouteilles;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mail = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $birth = null;
+
+    public function __construct()
+    {
+        $this->bouteilles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,5 +120,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // @deprecated, to be removed when upgrading to Symfony 8
+    }
+
+    /**
+     * @return Collection<int, Bouteilles>
+     */
+    public function getBouteilles(): Collection
+    {
+        return $this->bouteilles;
+    }
+
+    public function addBouteille(Bouteilles $bouteille): static
+    {
+        if (!$this->bouteilles->contains($bouteille)) {
+            $this->bouteilles->add($bouteille);
+            $bouteille->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBouteille(Bouteilles $bouteille): static
+    {
+        if ($this->bouteilles->removeElement($bouteille)) {
+            $bouteille->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): static
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getBirth(): ?\DateTime
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(\DateTime $birth): static
+    {
+        $this->birth = $birth;
+
+        return $this;
     }
 }
