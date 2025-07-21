@@ -18,23 +18,11 @@
 					'label_attr': {'class': 'form-label'},
 					'attr': {'placeholder': "L'année du millésime", 'class': 'form-input'}
 				}) }}
-				{{ form_row(wineForm.body, {
-					'label': 'Déscription',
+				{# {{ form_row(wineForm.description, {
+					'label': 'Description',
 					'label_attr': {'class': 'form-label'},
 					'attr': {'placeholder': '', 'class': 'form-input'}
-				}) }}
-				<div class="checkbox-group">
-					{{ form_label(wineForm.cepages) }}
-					{{ form_errors(wineForm.cepages) }}
-					<div>
-						{% for choice in wineForm.cepages %}
-							<label for="{{ choice.vars.id }}">
-								{{ form_widget(choice) }}
-								{{ choice.vars.label }}
-							</label>
-						{% endfor %}
-					</div>
-				</div>
+				}) }} #}
 
 				{{form_widget(wineForm)}}
 				<button>{{ isModification ? 'Modifier' :  'Ajouter' }}</button>

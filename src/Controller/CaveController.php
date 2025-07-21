@@ -22,7 +22,7 @@ class CaveController extends AbstractController
         // Récupère l'utilisateur connecté
         $user = $this->getUser();
         if (!$user) {
-            throw $this->createAccessDeniedException('Vous devez être connecté.');
+            throw $this->createAccessDeniedException('You have to log in to view this page.');
         }
 
         // Récupère la cave de l'utilisateur

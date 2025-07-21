@@ -61,7 +61,7 @@
 
 
 @mixin card () {
-        background-image: url(../../public/bg-card.png);
+        background-color: rgba(v.$colorPrimary, 0.6);
         background-position: center;
         object-fit: cover;
         color: v.$grey;
@@ -85,16 +85,6 @@
         .image {
             width: 90%;
             margin: auto;
-            .img{
-                padding: 0.5rem 1rem;
-                display: inline-block;
-                background-color: v.$colorSecondary;
-                border-radius: 15px;
-            }
-            .img:hover{
-                background: v.$grey;
-            }
-    
             img {
                 width: 100%;
                 object-fit: cover;
@@ -104,8 +94,7 @@
     
         .actions {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
             margin-top: 2rem;
             .modifier, .supprimer{
               padding: 0.5rem;
@@ -114,13 +103,13 @@
               font-size: 1rem;
             }
             .modifier {
-                background: #2196f3;
+                background: v.$colorSecondary;
                 color: white;
                 text-decoration: none;
             }
     
             .supprimer {
-                background: #f44336;
+                background: v.$colorPrimary;
                 color: white;
                 text-decoration: none;
             }

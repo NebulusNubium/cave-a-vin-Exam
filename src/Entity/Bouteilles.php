@@ -54,6 +54,12 @@ class Bouteilles
     #[ORM\JoinColumn(nullable: false)]
     private ?Countries $country = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imageFile = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $publishedAt = null;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -215,6 +221,30 @@ class Bouteilles
     public function setCountry(?Countries $country): static
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getImageFile(): ?string
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(string $imageFile): static
+    {
+        $this->imageFile = $imageFile;
+
+        return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeImmutable $publishedAt): static
+    {
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

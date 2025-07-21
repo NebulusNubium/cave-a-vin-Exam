@@ -7,10 +7,10 @@ body {
     color: white;
 
 }
+ul {list-style-type: none;}
 a{
     color: white;
     text-decoration: none;
-      border: none;
 }
 
     h1,h2,h3{
@@ -27,7 +27,7 @@ a{
     h2{
         font-size: 1.5rem;
     }
-// Formulaires (inscription, login, ajout glace)
+// Formulaires 
 .registration-form,
 .login-form, .picture-form {
     max-width: 500px;

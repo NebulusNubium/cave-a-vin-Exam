@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Caves des Utilisateurs{% endblock %}
+{% block title %}The Wine Cellars{% endblock %}
 
 {% block body %}
     <main id="user-caves">
-        <h1>Les Caves des Utilisateurs</h1>
+        <h1>All of our Wine Cellars</h1>
 
         {% if caves is empty %}
-            <p>Aucune cave enregistrée.</p>
+            <p>No cellar found.</p>
         {% else %}
             <div class="cave-list">
                 {% for cave in caves %}

@@ -1,14 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cave de {{ cave.user.username }}{% endblock %}
+{% block title %}The Cellar{% endblock %}
 
 {% block body %}
     <main id="cave-details">
-        <h1>Cave de {{ cave.user.username }}</h1>
-        <a href="{{ path('user_caves') }}" class="btn">Retour à la liste des caves</a>
-        {% if cave.bouteille is empty %}
-            <p>Cette cave est vide.</p>
+        {# <h1>Cave de {{ cave.User.Username }}</h1> #}
+        <a href="{{ path('user_caves') }}" class="btn">Back to users' cellars.</a>
+       
+        {% if cave == null %}
+            <p>You do not have a cellar yet.</p>
+            {{ form_start(addCellar, {'attr': {'class': 'register-form'}}) }}
+            <div class="form-group">
+                {{ form_label(addCellar.name) }}
+                {{ form_widget(addCellar.name, {'attr': {'class': 'input'}}) }}
+            </div>
+            <button class="submit-button">add</button>
+            {{ form_end(addCellar) }}
+
+        {% elseif cave.bouteilles %}
+            <p>You do not have bottles in your cellar.</p>
+            <a href="">Add a bottle</a>
+            
         {% else %}
+        <p>hello</p>
             <div class="bouteille-list">
                 {% for bouteille in cave.bouteilles %}
                     <article class="bottle">
@@ -25,7 +39,6 @@
                 {% endfor %}
             </div>
         {% endif %}
-        
         
     </main>
 {% endblock %}

@@ -47,9 +47,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $birth = null;
 
+    /**
+     * @var Collection<int, Cave>
+     */
+    #[ORM\OneToMany(targetEntity: Cave::class, mappedBy: 'User')]
+    private Collection $cave;
+
     public function __construct()
     {
         $this->bouteilles = new ArrayCollection();
+        $this->cave = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +176,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirth(\DateTime $birth): static
     {
         $this->birth = $birth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cave>
+     */
+    public function getCave(): Collection
+    {
+        return $this->cave;
+    }
+
+    public function addCave(Cave $cave): static
+    {
+        if (!$this->cave->contains($cave)) {
+            $this->cave->add($cave);
+            $cave->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCave(Cave $cave): static
+    {
+        if ($this->cave->removeElement($cave)) {
+            // set the owning side to null (unless already changed)
+            if ($cave->getUser() === $this) {
+                $cave->setUser(null);
+            }
+        }
 
         return $this;
     }

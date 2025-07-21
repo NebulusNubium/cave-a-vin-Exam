@@ -36,12 +36,12 @@ class WineFilterType extends AbstractType
                 'label' => 'Année du vin',
                 'attr' => ['placeholder' => 'Entrez une année']
             ])
-            ->add('Region', EntityType::class, [
+            ->add('regions', EntityType::class, [
                 'class' => Regions::class,
                 'choice_label' => 'name',
                 'required' => false,
                 'placeholder' => 'Sélectionnez une région',
-                'label' => 'Région'
+                'label' => 'Regions'
             ])
             // ->add('cepage', EntityType::class, [
             //     'class' => Cepage::class,

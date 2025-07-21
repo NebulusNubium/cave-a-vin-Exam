@@ -3,21 +3,25 @@
 {% block title %}Ma Cave{% endblock %}
 
 {% block body %}
+    <header id="banner">
+        <p>{{HomeMessage}}</p>
+        <p>{{dateAnniv}}</p>
+        <p>{{pourcentage}}% de {{input}} = {{result.value}}</p>
+    </header>
     <main>
-        <div class="pink">
-            <h2>Bienvenue dans</h2><h1>my cave</h1><h2>votre cave virtuelle</h2>
-            <p>Plongez dans l’univers du vin avec notre application de gestion de cave virtuelle. Pensée pour les amateurs et passionnés, elle vous permet de répertorier et organiser vos bouteilles avec élégance et simplicité.
-            Chaque bouteille raconte une histoire, chaque millésime capture un instant. Notre plateforme a été conçue pour offrir un espace personnel où vous pouvez consigner vos trésors viticoles, noter vos impressions et retrouver en un clin d'œil vos précieuses références.</p>
-            <div class="purple">
-                <article><p>Catalogue personnalisé : Ajoutez vos bouteilles, renseignez les détails (appellation, millésime, cépage, etc.) et classez-les selon vos préférences.</p></article>
-                <article><p>Organisation intuitive : Triez votre cave selon vos critères : régions, types de vin, occasions spéciales…</p></article>
-                <article><p>Notes & dégustations : Gardez une trace de vos dégustations et retrouvez facilement vos coups de cœur.</p></article>
-                <article><p>Recherche avancée : Filtrez et retrouvez rapidement une bouteille parmi votre collection.</p></article>
-            </div>
-            <div class="l-purple">
-                <p> Un espace raffiné pour les passionnés
-                    Avec une interface inspirée des salons feutrés et chaleureux, notre application vous plonge dans un cadre élégant où chaque détail a été pensé pour sublimer votre expérience.
-                    🍷 Prenez place, explorez, et laissez-vous guider par votre passion.</p>
+        <div class="home-container">
+            <h2>Welcome to</h2><h1>my cave</h1><h2></h2>
+            <p>Dive into the winning world of wine with our virtual cellar designed not just for collectors, but for a thriving community of enthusiasts. Catalog and organize your bottles into cellars with effortless elegance, then share each story and vintage snapshot with friends and fellow wine lovers. Swap tasting notes, discover new favorites through community recommendations, and celebrate every bottle together. Our platform gives you a personal space to track your treasures—and a communal cellar to connect, explore, and toast with passion.</p>
+            <div class="latest">
+                <article>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, delectus.</p>
+                </article>
+                <article>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, delectus.</p>
+                </article>
+                <article>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, delectus.</p>
+                </article>
             </div>
         </div>
        

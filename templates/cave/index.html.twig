@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ma Cave{% endblock %}
+{% block title %}My cellar{% endblock %}
 
 {% block body %}
-    <main id="cave">
+    <main id="myCellar">
         
 
         {% if cave is empty %}
-            <p>Votre cave est vide.</p>
+            <h2 id="emptyCellar">Your cellar is empty.</h2>
         {% else %}
             {% for bouteille in cave.bouteilles %}
                 <article class="bottle">

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ma Cave à Vin{% endblock %}
+{% block title %}My Cellar{% endblock %}
 
 {% block body %}
     <main id="cave">
@@ -10,63 +10,66 @@
                     {{ form_row(form.name) }}
                     {{ form_row(form.year) }}
                     {{ form_row(form.regions) }}
-                {# <div>
-                    {{ form_label(form.cepage) }}
-                    {{ form_widget(form.cepage) }}
-                </div> #}
                 <button class="btn btn-primary" type="submit">Filtrer</button>
             {{ form_end(form) }}
         </div>
         {# Affichage des vins filtrés #}
-        {% for wine in caves %}
-            <div class="see">
-                <article class="bottle">
-                    <div class="card">
-                        <div class="b-cave">
-                            <img src="{{ asset('uploads/images/' ~ wine.imageName) }}" alt="image Bouteille">
-                            <h2>{{ wine.name }}</h2>
-                        </div>
-                        <p>{{ wine.year }}</p>
-                        <p>{% for cepage in wine.cepages %}
-                                {{ cepage.name }}
-                            {% endfor %}
-                        </p>
-                        <p>{{ wine.regions.name }}</p>
-                        <p>{{ wine.regions.country.name }}</p>
-                        
-                        <!-- Description courte -->
-                        <p id="wine-description-{{ wine.id }}">
-                            {{ wine.body|slice(0, 100) }}... 
-                            <button onclick="toggleDescription({{ wine.id }})">Voir plus</button>
-                        </p>
-
-                        <!-- Description complète -->
-                        <p id="wine-description-full-{{ wine.id }}" style="display:none;">
-                            {{ wine.body }}
-                            <button onclick="toggleDescription({{ wine.id }})">Voir moins</button>
-                        </p>         
-                    </div>
+    {# <ul>
+        {% for bouteille in pagination %}
+            <li>
+                <a href="{{path('app_wine_cave', {id: bouteille.id})}}">{{bouteille.name}}</a>
+            </li>
+            {% endfor %}
+    </ul> #}
+        <section id="liste">
+            <div class="cards">
+            {% for bouteille in pagination %}
+                <div class="card">
                     
-                    {% if is_granted("ROLE_USER") %}
-                        <a href="{{ path('add_wine_to_cave', {'id': wine.id}) }}">Ajouter à Ma Cave</a> 
+                    <h2>{{ bouteille.name }}</h2>
+                    <p>{{ bouteille.year }}</p>
+                    <p>{{ bouteille.grapes }}</p>
+                    <p>{{ bouteille.region.name }}</p>
+                    <p>{{ bouteille.country.name }}</p>
+                    
+                    <!-- Description courte -->
+                    <p id="bouteille-description-{{ bouteille.id }}">
+                        {{ bouteille.description|slice(0, 100) }}... 
+                        <button onclick="toggleDescription({{ bouteille.id }})">Expand</button>
+                    </p>
+
+                    <!-- Description complète -->
+                    <p id="bouteille-description-full-{{ bouteille.id }}" style="display:none;">
+                        {{ bouteille.description }}
+                        <button onclick="toggleDescription({{ bouteille.id }})">Reduce</button>
+                    </p>
+                    <div class="actions">
+                    {% if is_granted("ROLE_USER", "ROLE_ADMIN") %}
+                        <a class="add" href="{{ path('add_wine_to_cave', {'id': bouteille.id}) }}">Add to cellar</a> 
                     {% endif %}
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <a href="{{ path('modify_wine', {'id': wine.id}) }}">Modifier</a>
-                        <form method="POST" onsubmit="return confirm('Confirmer la suppression?')" action="{{ path('delete_wine', {'id': wine.id}) }}">
+                    {% if is_granted('ROLE_ADMIN') or (app.user and app.user.id == bouteille.user.id) %}
+                        <a class="modifier" href="{{ path('app_wine_change', {'id': bouteille.id}) }}">Modifier</a>
+                        <form method="POST" onsubmit="return confirm('Confirmer la suppression?')" action="{{ path('delete_wine', {'id': bouteille.id}) }}">
                             <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ wine.id) }}">
-                            <button class="btn_suppr">Supprimer</button>
+                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ bouteille.id) }}">
+                            <button class="supprimer">Supprimer</button>
                         </form>
                     {% endif %}
-                </article>
-            </div>    
-        {% endfor %}
+                    </div>         
+                </div>
+                
+            {% endfor %}
+            </div>
+        </section>
+        <div class="pagination">
+  {{ knp_pagination_render(pagination) }}
+</div>
     </main> 
 
     <script>
-        function toggleDescription(wineId) {
-            var fullDescription = document.getElementById('wine-description-full-' + wineId);
-            var shortDescription = document.getElementById('wine-description-' + wineId);
+        function toggleDescription(bouteilleId) {
+            var fullDescription = document.getElementById('bouteille-description-full-' + bouteilleId);
+            var shortDescription = document.getElementById('bouteille-description-' + bouteilleId);
             
             if (fullDescription.style.display === 'none') {
                 fullDescription.style.display = 'block';

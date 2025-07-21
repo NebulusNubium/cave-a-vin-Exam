@@ -1,14 +1,14 @@
 <?php
 
+
 namespace App\Repository;
 
-use App\Entity\Bouteilles;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Bouteilles;
+use Doctrine\ORM\QueryBuilder;
 
-/**
- * @extends ServiceEntityRepository<Bouteilles>
- */
 class BouteillesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -16,28 +16,20 @@ class BouteillesRepository extends ServiceEntityRepository
         parent::__construct($registry, Bouteilles::class);
     }
 
-//    /**
-//     * @return Bouteilles[] Returns an array of Bouteilles objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function queryByUserCaves(User $user): QueryBuilder
+    {
+        return $this->createQueryBuilder('b')
+            ->innerJoin('b.caves', 'c')
+            ->andWhere('c.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('b.name', 'ASC')
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?Bouteilles
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findByUserCaves(User $user): array
+    {
+        return $this->queryByUserCaves($user)
+            ->getQuery()
+            ->getResult();
+    }
 }

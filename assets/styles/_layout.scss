@@ -1,25 +1,37 @@
 @use 'variables' as v;
 
 nav{
-    background-color: black;
+    background-color: v.$grey;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: center;
+    gap: 10%;
     
     .nav-list {
         display: flex;
         gap: 20px;
-        list-style-type: none;
+        padding-left: 0;
+        ul{
+
+        }
+        li{
+            background-image: url('../../public/images/bgBtn.png');
+            background-position: center;
+            background-size: cover;
+            padding: 1rem;
+        }
     }
 
     .nav-list li a {
         text-decoration: none;
         color: #fff;
-        padding: 10px;
+        padding: 1.5rem 4rem 1.5rem 1.5rem;
+        margin: 0;
     }
 
     
-    .w_logo{
-       margin: 1rem;
+    .logoTop{
+       margin-top: 2rem;
     }
     ul{
         display: flex;
@@ -39,9 +51,17 @@ nav{
         }
     }
 }
+#banner{
+    background: linear-gradient(
+    to bottom,
+    v.$grey 0%,
+    v.$grey 0%,  
+    #000000 100%);
 
+    p{margin: 0; text-align: center;}
+}
 footer{
-    background-color: v.$primary-color;
+    background-color: v.$grey;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

@@ -4,17 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Cave{% endblock %}</title>
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}" />
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}" />
 
-    <!-- CSS & JS avec Webpack Encore -->
-    {{ encore_entry_link_tags('app') }}
     {{ encore_entry_script_tags('app') }}
-
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -24,8 +16,8 @@
 </head>
 <body>
     <nav>
-        <div class="w_logo">
-            <img src="{{ asset('images/logo.png') }}" alt="logo site">
+        <div class="logoTop">
+            <a href=""><img src="{{ asset('images/logo.png') }}" alt="logo site"></a>
         </div>
 
         <ul class="nav-list" id="nav-list">
@@ -37,34 +29,33 @@
             {% endif %}
             
             <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('my_cellar') }}">My cellar</a></li>
             <li><a href="{{ path('user_caves') }}">All Wine Cellars</a></li>
             <li><a href="{{ path('app_wine_cave') }}">La Cave</a></li>
-            <li><a href="{{ path('cave') }}">My Cellar</a></li>
+
 
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('admin') }}">Admin</a></li>
             {% endif %}
         </ul>
     </nav>
-
     {% block body %}{% endblock %}
 
     <footer>
         <div class="b_logo">
-            <img src="{{ asset('images/local_images/logo-large.png') }}" alt="logo site">
+            <img src="{{ asset('images/logo.png') }}" alt="logo site">
         </div>
         <ul>
-            <li><a href="#">📜 Mentions légales</a></li>
-            <li><a href="#">🔐 Politique de confidentialité</a></li>
-            <li><a href="#">⚖️ Conditions d’utilisation</a></li>
+            <li><a href="#">Legal Mentions</a></li>
+            <li><a href="#">Confidentiality Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
         </ul>
         <ul>
-            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
         </ul>
         <ul>
-            <li><p>© 2025 My Cave. Tous droits réservés.</p></li>
+            <li><p>© 2025 My Cave. All rights applied.</p></li>
         </ul>
     </footer>
 
